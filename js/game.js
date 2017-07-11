@@ -1,6 +1,9 @@
 var mapGame = Array(Array()) ; 
-var heightMap = 50 ; 
-var widthMap = 50 ; 
+var heightMap = 100 ; 
+var widthMap = 100 ; 
+
+// variable test 
+var count =  0 ; 
 
 var caseMap = function()
 {
@@ -45,6 +48,7 @@ function drawMap()
 			var celluleMap = document.createElement("td") ; 
 			// ajoute de class
 			celluleMap.classList.add("r" + i + "c" + j);
+			celluleMap.setAttribute("onclick", "discoveryCase("+ i +"," + j + ")")
 			
 			if(mapGame[i][j].hide)
 			{
@@ -145,7 +149,11 @@ function discoveryCase(i, j)
 						{
 							//mapGame[i + x][j + y].nbBombVoisine++ ;
 							if(mapGame[i + x][j + y].hide)
+							{
 								discoveryCase(i + x, j + y);
+								count ++ ; // variable Test 
+								//drawMap() ; 
+							}
 						}
 					
 				}
@@ -154,7 +162,13 @@ function discoveryCase(i, j)
 	}
 }
 
-
+$(document).ready(function() 
+{
 // appel de test 
 createMap();
-//drawMap() ; 
+installationDesBombes(700, 70) ; 
+drawMap() ; 
+
+// Handler event
+$("table").on("click", drawMap) ; 
+}) ;
