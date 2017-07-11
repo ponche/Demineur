@@ -6,7 +6,7 @@ var caseMap = function()
 {
 	this.nbBombVoisine = 0 ; 
 	this.isBomb = false ; 
-	this.hide = true ; 
+	this.hide = false ; //TEST must is true on starts
 }
 
 
@@ -49,7 +49,8 @@ function drawMap()
 			if(mapGame[i][j].hide)
 			{
 				// on cache la cellule
-				celluleMap.classList.add("hide");
+				//celluleMap.classList.add("hide");
+				
 			}
 			else
 			{
@@ -57,7 +58,8 @@ function drawMap()
 				if(mapGame[i][j].isBomb)
 				{
 					//Boum
-					alert("vous avez perdu!!!") ;
+					// logo d'une bombe
+					celluleMap.textContent = 9 ; 
 				}
 				else
 				{
@@ -76,7 +78,8 @@ function drawMap()
 
 function installationDesBombes(nbBomb, espace)
 {
-	for(x = 0 ; x < nbBomb ; x++)
+	var x = 0; 
+	while( x < nbBomb )
 	{
 		var spaceBomb = Math.floor(Math.random() * espace) ; 
 		
@@ -89,8 +92,8 @@ function installationDesBombes(nbBomb, espace)
 				if(spaceBomb <= 0)
 				{
 					//Placement de la bombe
-					if(!placementBombe(i, j)
-						x-- ; 
+					if(placementBombe(i, j))
+						x++ ; 
 					
 					//tirage d'un nouveau nombre
 					spaceBomb = Math.floor(Math.random() * espace) ;
@@ -111,14 +114,21 @@ function placementBombe(i , j)
 		{
 			for(y = -1; y < 2 ; y++)
 			{
-				mapGame[i + x][j + y].nbBombVoisine++
+				if(typeof mapGame[i + x] !== 'undefined')
+					if(typeof mapGame[i + x][j + y] !== 'undefined')
+					{
+						console.log("dedans") ; 
+						// BUG !!!!!!!!!!!!!!!
+						mapGame[i + x][j + y].nbBombVoisine++ ;
+					}
+				
 			}
 		}
 		return true ; 
 	}
 	else
 		return false ; 
-
+}
 
 // appel de test 
 createMap();
