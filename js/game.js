@@ -1,6 +1,6 @@
 var mapGame = Array(Array()) ; 
-var heightMap = 10 ; 
-var widthMap = 10 ; 
+var heightMap = 100 ; 
+var widthMap = 100 ; 
 
 var caseMap = function()
 {
@@ -13,10 +13,10 @@ var caseMap = function()
 
 function createMap()
 {
-	for(i = 0; i < 10; i++)
+	for(i = 0; i < heightMap; i++)
 	{
 		mapGame.push([]) ; 
-		for(j = 0; j < 10 ; j++)
+		for(j = 0; j < widthMap ; j++)
 		{
 			mapGame[i].push(new caseMap()) ; 
 		}
@@ -43,6 +43,9 @@ function drawMap()
 		{
 			// Creation de la cellule  
 			var celluleMap = document.createElement("td") ; 
+			// ajoute de class
+			celluleMap.classList.add("r" + i + "c" + j);
+			celluleMap.textContent = mapGame[i][j].nbBombVoisine ; 
 			
 			rowArray.appendChild(celluleMap) ; 
 			
@@ -52,3 +55,7 @@ function drawMap()
 	
 }
 
+function placementBomb(nbBomb)
+{
+	
+}

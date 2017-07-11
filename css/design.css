@@ -1,0 +1,30 @@
+section 
+{
+	display: inline-block ; 
+	text-align : center ; 
+	width : 100% ; 
+}
+
+h1
+{
+	text-align: center ; 
+	display : inline-block ; 
+	color : red ; 
+}
+table
+{
+	border-collapse: collapse ; 
+	
+}
+td
+{
+	border: 1px solid black ; 
+	width: 10px ; 
+	height: 10px ; 
+}
+
+.hide
+{
+	background-color : yellow ; 
+}
+
