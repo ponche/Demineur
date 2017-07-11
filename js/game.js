@@ -1,12 +1,12 @@
 var mapGame = Array(Array()) ; 
-var heightMap = 100 ; 
-var widthMap = 100 ; 
+var heightMap = 50 ; 
+var widthMap = 50 ; 
 
 var caseMap = function()
 {
 	this.nbBombVoisine = 0 ; 
 	this.isBomb = false ; 
-	this.hide = false ; //TEST must is true on starts
+	this.hide = true ; //TEST must is true on starts
 }
 
 
@@ -49,7 +49,7 @@ function drawMap()
 			if(mapGame[i][j].hide)
 			{
 				// on cache la cellule
-				//celluleMap.classList.add("hide");
+				celluleMap.classList.add("hide");
 				
 			}
 			else
@@ -117,8 +117,6 @@ function placementBombe(i , j)
 				if(typeof mapGame[i + x] !== 'undefined')
 					if(typeof mapGame[i + x][j + y] !== 'undefined')
 					{
-						console.log("dedans") ; 
-						// BUG !!!!!!!!!!!!!!!
 						mapGame[i + x][j + y].nbBombVoisine++ ;
 					}
 				
@@ -129,6 +127,33 @@ function placementBombe(i , j)
 	else
 		return false ; 
 }
+function discoveryCase(i, j)
+{
+	if(mapGame[i][j].isBomb)
+		alert("Vous avez perdu !!!!") ; 
+	else
+	{
+		mapGame[i][j].hide = false ;
+		if(mapGame[i][j].nbBombVoisine == 0)
+		{	
+			for(x = -1 ; x < 2 ; x++)
+			{
+				for(y = -1; y < 2 ; y++)
+				{
+					if(typeof mapGame[i + x] !== 'undefined')
+						if(typeof mapGame[i + x][j + y] !== 'undefined')
+						{
+							//mapGame[i + x][j + y].nbBombVoisine++ ;
+							if(mapGame[i + x][j + y].hide)
+								discoveryCase(i + x, j + y);
+						}
+					
+				}
+			}
+		}
+	}
+}
+
 
 // appel de test 
 createMap();
