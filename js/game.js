@@ -36,13 +36,13 @@ function drawMap()
 	
 	// création du tableau 
 	
-	for(i = 0 ; i < mapGame.length ; i++)
+	for(var i = 0 ; i < mapGame.length ; i++)
 	{
 		//creation des balise tr (row) 
 		var rowArray = document.createElement("tr") ; 
 		tableau.appendChild(rowArray) ;
 		
-		for(j = 0 ; j < mapGame[i].length ; j++)
+		for(var j = 0 ; j < mapGame[i].length ; j++)
 		{
 			// Creation de la cellule  
 			var celluleMap = document.createElement("td") ; 
@@ -88,9 +88,9 @@ function installationDesBombes(nbBomb, espace)
 		var spaceBomb = Math.floor(Math.random() * espace) ; 
 		
 		//on parcours le tableau 
-		for(i = 0; i < mapGame.length ; i++)
+		for(var i = 0; i < mapGame.length ; i++)
 		{
-			for(j = 0; j < mapGame[i].length; j++)
+			for(var j = 0; j < mapGame[i].length; j++)
 			{
 				spaceBomb-- ; 
 				if(spaceBomb <= 0)
@@ -114,7 +114,7 @@ function placementBombe(i , j)
 		mapGame[i][j].isBomb = true ; 
 	
 		// incrémentation des indicateur 
-		for(x = -1 ; x < 2 ; x++)
+		for(var x = -1 ; x < 2 ; x++)
 		{
 			for(y = -1; y < 2 ; y++)
 			{
@@ -140,11 +140,12 @@ function discoveryCase(i, j)
 		mapGame[i][j].hide = false ;
 		if(mapGame[i][j].nbBombVoisine == 0)
 		{	
-			for(x = -1 ; x < 2 ; x++)
+			for(var x = -1 ; x < 2 ; x++)
 			{
-				for(y = -1; y < 2 ; y++)
+				for(var y = -1; y < 2 ; y++)
 				{
 					if(typeof mapGame[i + x] !== 'undefined')
+					{
 						if(typeof mapGame[i + x][j + y] !== 'undefined')
 						{
 							//mapGame[i + x][j + y].nbBombVoisine++ ;
@@ -152,10 +153,9 @@ function discoveryCase(i, j)
 							{
 								discoveryCase(i + x, j + y);
 								count ++ ; // variable Test 
-								//drawMap() ; 
 							}
 						}
-					
+					}
 				}
 			}
 		}
