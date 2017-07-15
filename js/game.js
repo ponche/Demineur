@@ -16,10 +16,10 @@ var caseMap = function()
 
 function createMap()
 {
-	for(i = 0; i < heightMap; i++)
+	for(var i = 0; i < heightMap; i++)
 	{
 		mapGame.push([]) ; 
-		for(j = 0; j < widthMap ; j++)
+		for(var j = 0; j < widthMap ; j++)
 		{
 			mapGame[i].push(new caseMap()) ; 
 		}
