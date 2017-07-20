@@ -3,7 +3,7 @@ jeu du démineur en javascript
 
 issues : 
 
-- nothing
+- problème dans la fonction installationdesBombe(), la condition n'est vérfié qu'a à fin des boucles.
 
 ----------------------------------------------------------------------------------------------------
 
