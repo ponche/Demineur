@@ -137,7 +137,10 @@ function discoveryCase(i, j)
 		alert("Vous avez perdu !!!!") ; 
 	else
 	{
+		
 		mapGame[i][j].hide = false ;
+		setTimeout(updateCellule, 1000 , i, j ) ;
+		//updateCellule(i, j) ; 
 		if(mapGame[i][j].nbBombVoisine == 0)
 		{	
 			for(var x = -1 ; x < 2 ; x++)
@@ -151,6 +154,7 @@ function discoveryCase(i, j)
 							//mapGame[i + x][j + y].nbBombVoisine++ ;
 							if(mapGame[i + x][j + y].hide)
 							{
+								//console.log(setTimeout(discoveryCase, 100, i + x , j + y )) ; 
 								discoveryCase(i + x, j + y);
 								count ++ ; // variable Test 
 							}
@@ -158,6 +162,34 @@ function discoveryCase(i, j)
 					}
 				}
 			}
+		}
+	}
+}
+function updateCellule(x, y) 
+{
+	
+	var cellule = document.querySelector(".r"+x+"c"+y)
+	
+	if(mapGame[x][y].hide)
+	{
+		// on cache la cellule
+		cellule.classList.add("hide");
+		
+	}
+	else
+	{
+		// on affiche la cellule 
+		
+		if(mapGame[x][y].isBomb)
+		{
+			//Boum
+			// logo d'une bombe
+			cellule.textContent = 9 ; 
+		}
+		else
+		{
+			cellule.textContent = mapGame[x][y].nbBombVoisine ;
+			cellule.classList.remove("hide") ;
 		}
 	}
 }
@@ -170,5 +202,5 @@ installationDesBombes(700, 70) ;
 drawMap() ; 
 
 // Handler event
-$("table").on("click", drawMap) ; 
+//$("table").on("click", drawMap) ; 
 }) ;
